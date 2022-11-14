@@ -1,21 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef int element;
-typedef struct DListNode {	// ÀÌÁß¿¬°á ³ëµå Å¸ÀÔ
+typedef struct DListNode {	// ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
 	element data;
 	struct DListNode* llink;
 	struct DListNode* rlink;
 } DListNode;
 
-// ÀÌÁß ¿¬°á ¸®½ºÆ®¸¦ ÃÊ±âÈ­
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ê±ï¿½È­
 void init(DListNode* phead)
 {
 	phead->llink = phead;
 	phead->rlink = phead;
 }
 
-// ÀÌÁß ¿¬°á ¸®½ºÆ®ÀÇ ³ëµå¸¦ Ãâ·Â
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½
 void print_dlist(DListNode* phead)
 {
 	DListNode* p;
@@ -24,7 +25,7 @@ void print_dlist(DListNode* phead)
 	}
 	printf("\n");
 }
-// »õ·Î¿î µ¥ÀÌÅÍ¸¦ ³ëµå beforeÀÇ ¿À¸¥ÂÊ¿¡ »ðÀÔÇÑ´Ù.
+// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ beforeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 void dinsert(DListNode *before, element data)
 {
 	DListNode *newnode = (DListNode *)malloc(sizeof(DListNode));
@@ -34,7 +35,7 @@ void dinsert(DListNode *before, element data)
 	before->rlink->llink = newnode;
 	before->rlink = newnode;
 }
-// ³ëµå removed¸¦ »èÁ¦ÇÑ´Ù.
+// ï¿½ï¿½ï¿½ removedï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 void ddelete(DListNode* head, DListNode* removed)
 {
 	if (removed == head) return;
@@ -43,18 +44,16 @@ void ddelete(DListNode* head, DListNode* removed)
 	free(removed);
 }
 
-// ÀÌÁß ¿¬°á ¸®½ºÆ® Å×½ºÆ® ÇÁ·Î±×·¥
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½Î±×·ï¿½
 int main(void)
 {
 	DListNode* head = (DListNode *)malloc(sizeof(DListNode));
 	init(head);
-	printf("Ãß°¡ ´Ü°è\n");
 	for (int i = 0; i < 5; i++) {
-		// Çìµå ³ëµåÀÇ ¿À¸¥ÂÊ¿¡ »ðÀÔ
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 		dinsert(head, i);
 		print_dlist(head);
 	}
-	printf("\n»èÁ¦ ´Ü°è\n");
 	for (int i = 0; i < 5; i++) {
 		print_dlist(head);
 		ddelete(head, head->rlink);

@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 typedef int element;
-typedef struct ListNode { 	// ³ëµå Å¸ÀÔ
+typedef struct ListNode { 	// ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
 	element data;
 	struct ListNode *link;
 } ListNode;
 
-// ¸®½ºÆ®ÀÇ Ç×¸ñ Ãâ·Â
+// ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ï¿½
 void print_list(ListNode* head)
 {
 	ListNode* p;
@@ -18,7 +18,7 @@ void print_list(ListNode* head)
 		printf("%d->", p->data);
 		p = p->link;
 	} while (p != head);
-	printf("%d->", p->data); // ¸¶Áö¸· ³ëµå Ãâ·Â
+	printf("%d->", p->data); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 }
 
 ListNode* insert_first(ListNode* head, element data)
@@ -31,9 +31,9 @@ ListNode* insert_first(ListNode* head, element data)
 	}
 	else {
 		node->link = head->link;	// (1)
-		head->link = node;		// (2)
+		head->link = node;	// (2)
 	}
-	return head;	// º¯°æµÈ Çìµå Æ÷ÀÎÅÍ¸¦ ¹İÈ¯ÇÑ´Ù. 
+	return head;	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½. 
 }
 
 ListNode* insert_last(ListNode* head, element data)
@@ -49,12 +49,30 @@ ListNode* insert_last(ListNode* head, element data)
 		head->link = node;		// (2)
 		head = node;		// (3)
 	}
-	return head;	// º¯°æµÈ Çìµå Æ÷ÀÎÅÍ¸¦ ¹İÈ¯ÇÑ´Ù. 
+	return head;	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½. 
 }
-// ¿øÇü ¿¬°á ¸®½ºÆ® Å×½ºÆ® ÇÁ·Î±×·¥
+
+int get_size(ListNode *L)
+{
+	ListNode *temp;
+	int count = 0;
+	if (L == NULL)
+		return 0;
+	else {
+		temp = L->link;
+		while(temp != L) {
+			count ++;
+			temp = temp->link;
+		}
+		count++;
+	}
+	return count;
+}
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½Î±×·ï¿½
 int main(void)
 {
 	ListNode *head = NULL;
+	int count = 0;
 
 	// list = 10->20->30->40
 	head = insert_last(head, 20);
@@ -62,5 +80,8 @@ int main(void)
 	head = insert_last(head, 40);
 	head = insert_first(head, 10);
 	print_list(head);
+	count = get_size(head);
+	printf("\n");
+	printf("ì›í˜• ë¦¬ìŠ¤íŠ¸ì˜ ê°œìˆ˜ : %d", count);
 	return 0;
 }
