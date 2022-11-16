@@ -36,9 +36,7 @@ void inorder_iter(TreeNode *root)
 		root = root->right;
 	}
 }
-//		  15
-//	   4		 20
-//    1	      16  25
+
 TreeNode n1 = { 1,  NULL, NULL };
 TreeNode n2 = { 4,  &n1,  NULL };
 TreeNode n3 = { 16, NULL, NULL };
@@ -49,7 +47,7 @@ TreeNode *root = &n6;
 
 int main(void)
 {
-	printf("반복적 순회=");
+	printf("중위 순회=");
 	inorder_iter(root);
 	printf("\n");
 	return 0;

@@ -7,53 +7,46 @@ typedef struct TreeNode {
 	struct TreeNode *left, *right;
 } TreeNode;
 
-// ================ ¿øÇüÅ¥ ÄÚµå ½ÃÀÛ =================
 #define MAX_QUEUE_SIZE 100
 typedef TreeNode * element;
-typedef struct { // Å¥ Å¸ÀÔ
+typedef struct {
 	element  data[MAX_QUEUE_SIZE];
 	int  front, rear;
 } QueueType;
 
-// ¿À·ù ÇÔ¼ö
 void error(char *message)
 {
 	fprintf(stderr, "%s\n", message);
 	exit(1);
 }
 
-// °ø¹é »óÅÂ °ËÃâ ÇÔ¼ö
 void init_queue(QueueType *q)
 {
 	q->front = q->rear = 0;
 }
 
-// °ø¹é »óÅÂ °ËÃâ ÇÔ¼ö
 int is_empty(QueueType *q)
 {
 	return (q->front == q->rear);
 }
 
-// Æ÷È­ »óÅÂ °ËÃâ ÇÔ¼ö
 int is_full(QueueType *q)
 {
 	return ((q->rear + 1) % MAX_QUEUE_SIZE == q->front);
 }
 
-// »ðÀÔ ÇÔ¼ö
 void enqueue(QueueType *q, element item)
 {
 	if (is_full(q))
-		error("Å¥°¡ Æ÷È­»óÅÂÀÔ´Ï´Ù");
+		error("Å¥ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½");
 	q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
 	q->data[q->rear] = item;
 }
 
-// »èÁ¦ ÇÔ¼ö
 element dequeue(QueueType *q)
 {
 	if (is_empty(q))
-		error("Å¥°¡ °ø¹é»óÅÂÀÔ´Ï´Ù");
+		error("Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½");
 	q->front = (q->front + 1) % MAX_QUEUE_SIZE;
 	return q->data[q->front];
 }
@@ -62,7 +55,7 @@ void level_order(TreeNode *ptr)
 {
 	QueueType q;
 
-	init_queue(&q);	 // Å¥ ÃÊ±âÈ­
+	init_queue(&q);
 
 	if (ptr == NULL) return;
 	enqueue(&q, ptr);
@@ -75,9 +68,7 @@ void level_order(TreeNode *ptr)
 			enqueue(&q, ptr->right);
 	}
 }
-//		  15
-//	   4		 20
-//    1	      16  25
+
 TreeNode n1 = { 1,  NULL, NULL };
 TreeNode n2 = { 4,  &n1,  NULL };
 TreeNode n3 = { 16, NULL, NULL };
@@ -88,7 +79,7 @@ TreeNode *root = &n6;
 
 int main(void)
 {
-	printf("·¹º§ ¼øÈ¸=");
+	printf("ë ˆë²¨ ìˆœíšŒ =");
 	level_order(root);
 	printf("\n");
 	return 0;

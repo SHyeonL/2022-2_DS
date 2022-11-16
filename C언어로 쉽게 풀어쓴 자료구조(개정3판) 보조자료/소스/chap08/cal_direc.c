@@ -15,7 +15,7 @@ int calc_dir_size(TreeNode *root)
 	right_size = calc_dir_size(root->right);
 	return (root->data + left_size + right_size);
 }
-// 
+
 int main(void)
 {
 	TreeNode n4 = { 500, NULL, NULL };
@@ -24,5 +24,5 @@ int main(void)
 	TreeNode n2 = { 50, NULL, NULL };
 	TreeNode n1 = { 0, &n2, &n3 };
 
-	printf("µğ·ºÅä¸®ÀÇ Å©±â=%d\n", calc_dir_size(&n1));
+	printf("ë””ë ‰í† ë¦¬ì˜ í¬ê¸° = %d\n", calc_dir_size(&n1));
 }

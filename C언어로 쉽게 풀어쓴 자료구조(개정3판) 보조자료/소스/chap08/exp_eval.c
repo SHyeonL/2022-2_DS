@@ -2,12 +2,10 @@
 #include <stdlib.h>
 
 typedef struct TreeNode {
-	int data;
-	struct TreeNode *left, *right;
+    int data;
+    struct TreeNode *left, *right;
 } TreeNode;
-//		     +
-//	     *		 +
-//    1	   4   16  25
+
 TreeNode n1 = { 1,  NULL, NULL };
 TreeNode n2 = { 4,  NULL,  NULL };
 TreeNode n3 = { '*',  &n1,  &n2 };
@@ -15,35 +13,34 @@ TreeNode n4 = { 16, NULL, NULL };
 TreeNode n5 = { 25, NULL, NULL };
 TreeNode n6 = { '+', &n4,  &n5 };
 TreeNode n7 = { '+', &n3,  &n6 };
-TreeNode *exp = &n7;
+TreeNode *answer = &n7;
 
-// ¼ö½Ä °è»ê ÇÔ¼ö
 int evaluate(TreeNode *root)
 {
-	if (root == NULL)
-		return 0;
-	if (root->left == NULL && root->right == NULL)
-		return root->data;
-	else {
-		int op1 = evaluate(root->left);
-		int op2 = evaluate(root->right);
-		printf("%d %c %dÀ» °è»êÇÕ´Ï´Ù.\n", op1, root->data, op2);
-		switch (root->data) {
-		case '+':
-			return op1 + op2;
-		case '-':
-			return op1 - op2;
-		case '*':
-			return op1 * op2;
-		case '/':
-			return op1 / op2;
-		}
-	}
-	return 0;
+    if (root == NULL)
+        return 0;
+    if (root->left == NULL && root->right == NULL)
+        return root->data;
+    else {
+        int op1 = evaluate(root->left);
+        int op2 = evaluate(root->right);
+        printf("%d %c %dì„ ê³„ì‚°í•©ë‹ˆë‹¤.\n", op1, root->data, op2);
+        switch (root->data) {
+            case '+':
+                return op1 + op2;
+            case '-':
+                return op1 - op2;
+            case '*':
+                return op1 * op2;
+            case '/':
+                return op1 / op2;
+        }
+    }
+    return 0;
 }
-// 
+
 int main(void)
 {
-	printf("¼ö½ÄÀÇ °ªÀº %dÀÔ´Ï´Ù. \n", evaluate(exp));
-	return 0;
+    printf("ìˆ˜ì‹ì˜ ê°’ì€ %dì…ë‹ˆë‹¤. \n", evaluate(answer));
+    return 0;
 }
