@@ -49,7 +49,7 @@ TreeNode *root = &n6;
 
 int main(void)
 {
-	printf("ÁßÀ§ ¼øÈ¸=");
+	printf("ë°˜ë³µì  ìˆœíšŒ=");
 	inorder_iter(root);
 	printf("\n");
 	return 0;
