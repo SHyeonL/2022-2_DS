@@ -34,9 +34,7 @@ void inorder_iter(TreeNode *root) {
     }
 }
 
-TreeNode test = {12, NULL, NULL};
-TreeNode n0 = {33, &test, NULL};
-TreeNode n1 = {1, &n0, NULL};
+TreeNode n1 = {1, NULL, NULL};
 TreeNode n2 = {4, &n1, NULL};
 TreeNode n3 = {16, NULL, NULL};
 TreeNode n4 = {25, NULL, NULL};

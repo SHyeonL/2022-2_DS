@@ -45,10 +45,24 @@ TreeNode n5 = { 20, &n3,  &n4 };
 TreeNode n6 = { 15, &n2,  &n5 };
 TreeNode *root = &n6;
 
+int get_height(TreeNode *node)
+{
+	int height = 0;
+
+	if (node != NULL)
+		height = 1 + max(get_height(node->left),
+			get_height(node->right));
+
+	return height;
+}
+
 int main(void)
 {
 	printf("중위 순회=");
 	inorder_iter(root);
 	printf("\n");
+	int height = 0;
+	height = get_height(root);
+	printf("%d", height);
 	return 0;
 }

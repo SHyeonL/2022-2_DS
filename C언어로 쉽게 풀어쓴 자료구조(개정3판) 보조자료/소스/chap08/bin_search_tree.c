@@ -3,114 +3,100 @@
 
 typedef int element;
 typedef struct TreeNode {
-	element key;
-	struct TreeNode *left, *right;
+    element key;
+    struct TreeNode *left, *right;
 } TreeNode;
 
-// ¼øÈ¯ÀûÀÎ Å½»ö ÇÔ¼ö
 TreeNode * search(TreeNode * node, int key)
 {
-	if (node == NULL) return NULL;
-	if (key == node->key) return node;
-	else if (key < node->key)
-		return search(node->left, key);
-	else
-		return search(node->right, key);
+    if (node == NULL) return NULL;
+    if (key == node->key) return node;
+    else if (key < node->key)
+        return search(node->left, key);
+    else
+        return search(node->right, key);
 }
 TreeNode * new_node(int item)
 {
-	TreeNode * temp = (TreeNode *)malloc(sizeof(TreeNode));
-	temp->key = item;
-	temp->left = temp->right = NULL;
-	return temp;
+    TreeNode * temp = (TreeNode *)malloc(sizeof(TreeNode));
+    temp->key = item;
+    temp->left = temp->right = NULL;
+    return temp;
 }
 TreeNode * insert_node(TreeNode * node, int key)
 {
-	// Æ®¸®°¡ °ø¹éÀÌ¸é »õ·Î¿î ³ëµå¸¦ ¹İÈ¯ÇÑ´Ù. 
-	if (node == NULL) return new_node(key);
+    if (node == NULL) return new_node(key);
 
-	// ±×·¸Áö ¾ÊÀ¸¸é ¼øÈ¯ÀûÀ¸·Î Æ®¸®¸¦ ³»·Á°£´Ù. 
-	if (key < node->key)
-		node->left = insert_node(node->left, key);
-	else if (key > node->key)
-		node->right = insert_node(node->right, key);
+    if (key < node->key)
+        node->left = insert_node(node->left, key);
+    else if (key > node->key)
+        node->right = insert_node(node->right, key);
 
-	// º¯°æµÈ ·çÆ® Æ÷ÀÎÅÍ¸¦ ¹İÈ¯ÇÑ´Ù. 
-	return node;
+    return node;
 }
 TreeNode * min_value_node(TreeNode * node)
 {
-	TreeNode * current = node;
+    TreeNode * current = node;
 
-	// ¸Ç ¿ŞÂÊ ´Ü¸» ³ëµå¸¦ Ã£À¸·¯ ³»·Á°¨
-	while (current->left != NULL)
-		current = current->left;
+    while (current->left != NULL)
+        current = current->left;
 
-	return current;
+    return current;
 }
-// ÀÌÁø Å½»ö Æ®¸®¿Í Å°°¡ ÁÖ¾îÁö¸é Å°°¡ ÀúÀåµÈ ³ëµå¸¦ »èÁ¦ÇÏ°í 
-// »õ·Î¿î ·çÆ® ³ëµå¸¦ ¹İÈ¯ÇÑ´Ù. 
+
 TreeNode * delete_node(TreeNode * root, int key)
 {
-	if (root == NULL) return root;
+    if (root == NULL) return root;
 
-	// ¸¸¾à Å°°¡ ·çÆ®º¸´Ù ÀÛÀ¸¸é ¿ŞÂÊ ¼­ºê Æ®¸®¿¡ ÀÖ´Â °ÍÀÓ
-	if (key < root->key)
-		root->left = delete_node(root->left, key);
-	// ¸¸¾à Å°°¡ ·çÆ®º¸´Ù Å©¸é ¿À¸¥ÂÊ ¼­ºê Æ®¸®¿¡ ÀÖ´Â °ÍÀÓ
-	else if (key > root->key)
-		root->right = delete_node(root->right, key);
-	// Å°°¡ ·çÆ®¿Í °°À¸¸é ÀÌ ³ëµå¸¦ »èÁ¦ÇÏ¸é µÊ
-	else {
-		// Ã¹ ¹øÂ°³ª µÎ ¹øÂ° °æ¿ì
-		if (root->left == NULL) {
-			TreeNode * temp = root->right;
-			free(root);
-			return temp;
-		}
-		else if (root->right == NULL) {
-			TreeNode * temp = root->left;
-			free(root);
-			return temp;
-		}
-		// ¼¼ ¹øÂ° °æ¿ì
-		TreeNode * temp = min_value_node(root->right);
+    if (key < root->key)
+        root->left = delete_node(root->left, key);
+    else if (key > root->key)
+        root->right = delete_node(root->right, key);
+    else {
+        if (root->left == NULL) {
+            TreeNode * temp = root->right;
+            free(root);
+            return temp;
+        }
+        else if (root->right == NULL) {
+            TreeNode * temp = root->left;
+            free(root);
+            return temp;
+        }
+        TreeNode * temp = min_value_node(root->right);
 
-		// Áß¿Ü ¼øÈ¸½Ã ÈÄ°è ³ëµå¸¦ º¹»çÇÑ´Ù. 
-		root->key = temp->key;
-		// Áß¿Ü ¼øÈ¸½Ã ÈÄ°è ³ëµå¸¦ »èÁ¦ÇÑ´Ù. 
-		root->right = delete_node(root->right, temp->key);
-	}
-	return root;
+        root->key = temp->key;
+        root->right = delete_node(root->right, temp->key);
+    }
+    return root;
 }
 
-// ÁßÀ§ ¼øÈ¸
 void inorder(TreeNode * root) {
-	if (root) {
-		inorder(root->left);// ¿ŞÂÊ¼­ºêÆ®¸® ¼øÈ¸
-		printf("[%d] ", root->key);  // ³ëµå ¹æ¹®
-		inorder(root->right);// ¿À¸¥ÂÊ¼­ºêÆ®¸® ¼øÈ¸
-	}
+    if (root) {
+        inorder(root->left);
+        printf("[%d] ", root->key);
+        inorder(root->right);
+    }
 }
 
 int main(void)
 {
-	TreeNode * root = NULL;
-	TreeNode * tmp = NULL;
+    TreeNode * root = NULL;
+    TreeNode * tmp = NULL;
 
-	root = insert_node(root, 30);
-	root = insert_node(root, 20);
-	root = insert_node(root, 10);
-	root = insert_node(root, 40);
-	root = insert_node(root, 50);
-	root = insert_node(root, 60);
+    root = insert_node(root, 30);
+    root = insert_node(root, 20);
+    root = insert_node(root, 10);
+    root = insert_node(root, 40);
+    root = insert_node(root, 50);
+    root = insert_node(root, 60);
 
-	printf("ÀÌÁø Å½»ö Æ®¸® ÁßÀ§ ¼øÈ¸ °á°ú \n");
-	inorder(root);
-	printf("\n\n");
-	if (search(root, 30) != NULL)
-		printf("ÀÌÁø Å½»ö Æ®¸®¿¡¼­ 30À» ¹ß°ßÇÔ \n");
-	else
-		printf("ÀÌÁø Å½»ö Æ®¸®¿¡¼­ 30À» ¹ß°ß¸øÇÔ \n");
-	return 0;
+    printf("ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ ì¤‘ìœ„ ìˆœíšŒ ê²°ê³¼\n");
+    inorder(root);
+    printf("\n\n");
+    if (search(root, 30) != NULL)
+        printf("ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì—ì„œ 30ì„ ë°œê²¬í•¨ \n");
+    else
+        printf("ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì—ì„œ 30ì„ ë°œê²¬ëª»í•¨ \n");
+    return 0;
 }
