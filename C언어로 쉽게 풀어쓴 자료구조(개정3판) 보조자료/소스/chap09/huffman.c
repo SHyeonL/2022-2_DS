@@ -20,31 +20,31 @@ typedef struct {
 	int heap_size;
 } HeapType;
 
-// »ý¼º ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 HeapType* create()
 {
 	return (HeapType*)malloc(sizeof(HeapType));
 }
-// ÃÊ±âÈ­ ÇÔ¼ö
+// ï¿½Ê±ï¿½È­ ï¿½Ô¼ï¿½
 void init(HeapType* h)
 {
 	h->heap_size = 0;
 }
-// ÇöÀç ¿ä¼ÒÀÇ °³¼ö°¡ heap_sizeÀÎ È÷ÇÁ h¿¡ itemÀ» »ðÀÔÇÑ´Ù.
-// »ðÀÔ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ heap_sizeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ hï¿½ï¿½ itemï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 void insert_min_heap(HeapType* h, element item)
 {
 	int i;
 	i = ++(h->heap_size);
 
-	//  Æ®¸®¸¦ °Å½½·¯ ¿Ã¶ó°¡¸é¼­ ºÎ¸ð ³ëµå¿Í ºñ±³ÇÏ´Â °úÁ¤
+	//  Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Å½ï¿½ï¿½ï¿½ ï¿½Ã¶ó°¡¸é¼­ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
 	while ((i != 1) && (item.key < h->heap[i / 2].key)) {
 		h->heap[i] = h->heap[i / 2];
 		i /= 2;
 	}
-	h->heap[i] = item;     // »õ·Î¿î ³ëµå¸¦ »ðÀÔ
+	h->heap[i] = item;     // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½
 }
-// »èÁ¦ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 element delete_min_heap(HeapType* h)
 {
 	int parent, child;
@@ -55,12 +55,12 @@ element delete_min_heap(HeapType* h)
 	parent = 1;
 	child = 2;
 	while (child <= h->heap_size) {
-		// ÇöÀç ³ëµåÀÇ ÀÚ½Ä³ëµåÁß ´õ ÀÛÀº ÀÚ½Ä³ëµå¸¦ Ã£´Â´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½Ä³ï¿½å¸¦ Ã£ï¿½Â´ï¿½.
 		if ((child < h->heap_size) &&
 			(h->heap[child].key) > h->heap[child + 1].key)
 			child++;
 		if (temp.key < h->heap[child].key) break;
-		// ÇÑ ´Ü°è ¾Æ·¡·Î ÀÌµ¿
+		// ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		h->heap[parent] = h->heap[child];
 		parent = child;
 		child *= 2;
@@ -69,7 +69,7 @@ element delete_min_heap(HeapType* h)
 	return item;
 }
 
-// ÀÌÁø Æ®¸® »ý¼º ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 TreeNode* make_tree(TreeNode* left,
 	TreeNode* right)
 {
@@ -79,7 +79,7 @@ TreeNode* make_tree(TreeNode* left,
 	node->right = right;
 	return node;
 }
-// ÀÌÁø Æ®¸® Á¦°Å ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 void destroy_tree(TreeNode* root)
 {
 	if (root == NULL) return;
@@ -102,26 +102,26 @@ void print_array(int codes[], int n)
 void print_codes(TreeNode* root, int codes[], int top)
 {
 
-	// 1À» ÀúÀåÇÏ°í ¼øÈ¯È£ÃâÇÑ´Ù. 
+	// 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½È¯È£ï¿½ï¿½ï¿½Ñ´ï¿½. 
 	if (root->left) {
 		codes[top] = 1;
 		print_codes(root->left, codes, top + 1);
 	}
 
-	// 0À» ÀúÀåÇÏ°í ¼øÈ¯È£ÃâÇÑ´Ù. 
+	// 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½È¯È£ï¿½ï¿½ï¿½Ñ´ï¿½. 
 	if (root->right) {
 		codes[top] = 0;
 		print_codes(root->right, codes, top + 1);
 	}
 
-	// ´Ü¸»³ëµåÀÌ¸é ÄÚµå¸¦ Ãâ·ÂÇÑ´Ù. 
+	// ï¿½Ü¸ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Úµå¸¦ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. 
 	if (is_leaf(root)) {
 		printf("%c: ", root->ch);
 		print_array(codes, top);
 	}
 }
 
-// ÇãÇÁ¸¸ ÄÚµå »ý¼º ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 void huffman_tree(int freq[], char ch_list[], int n)
 {
 	int i;
@@ -141,17 +141,17 @@ void huffman_tree(int freq[], char ch_list[], int n)
 		insert_min_heap(heap, e);
 	}
 	for (i = 1; i<n; i++) {
-		// ÃÖ¼Ò°ªÀ» °¡Áö´Â µÎ°³ÀÇ ³ëµå¸¦ »èÁ¦
+		// ï¿½Ö¼Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½
 		e1 = delete_min_heap(heap);
 		e2 = delete_min_heap(heap);
-		// µÎ°³ÀÇ ³ëµå¸¦ ÇÕÄ£´Ù.
+		// ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½Ä£ï¿½ï¿½.
 		x = make_tree(e1.ptree, e2.ptree);
 		e.key = x->weight = e1.key + e2.key;
 		e.ptree = x;
 		printf("%d+%d->%d \n", e1.key, e2.key, e.key);
 		insert_min_heap(heap, e);
 	}
-	e = delete_min_heap(heap); // ÃÖÁ¾ Æ®¸®
+	e = delete_min_heap(heap); // ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½
 	print_codes(e.ptree, codes, top);
 	destroy_tree(e.ptree);
 	free(heap);
