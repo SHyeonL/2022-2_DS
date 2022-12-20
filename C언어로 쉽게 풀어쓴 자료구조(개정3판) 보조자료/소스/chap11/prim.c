@@ -7,14 +7,14 @@
 #define INF 1000L
 
 typedef struct GraphType {
-	int n;	// Á¤Á¡ÀÇ °³¼ö
+	int n;
 	int weight[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
 int selected[MAX_VERTICES];
 int distance[MAX_VERTICES];
 
-// ÃÖ¼Ò dist[v] °ªÀ» °®´Â Á¤Á¡À» ¹ÝÈ¯
+
 int get_min_vertex(int n)
 {
 	int v, i;
@@ -27,7 +27,7 @@ int get_min_vertex(int n)
 		if (!selected[i] && (distance[i] < distance[v])) v = i;
 	return (v);
 }
-//
+
 void prim(GraphType* g, int s)
 {
 	int i, u, v;
@@ -39,7 +39,7 @@ void prim(GraphType* g, int s)
 		u = get_min_vertex(g->n);
 		selected[u] = TRUE;
 		if (distance[u] == INF) return;
-		printf("Á¤Á¡ %d Ãß°¡\n", u);
+		printf("ï¿½ï¿½ï¿½ï¿½ %d ï¿½ß°ï¿½\n", u);
 		for (v = 0; v<g->n; v++)
 			if (g->weight[u][v] != INF)
 				if (!selected[v] && g->weight[u][v]< distance[v])
