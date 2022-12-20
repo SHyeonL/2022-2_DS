@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef char element[100];
-typedef struct ListNode { 	// ³ëµå Å¸ÀÔ
+typedef struct ListNode {
 	element data;
 	struct ListNode *link;
 } ListNode;
@@ -11,7 +12,6 @@ typedef struct CListType {
 	ListNode *head;
 } CListType;
 
-// ¸®½ºÆ®ÀÇ Ç×¸ñ Ãâ·Â
 void print_list(CListType* L)
 {
 	ListNode* p;
@@ -22,7 +22,7 @@ void print_list(CListType* L)
 		printf("%s->", p->data);
 		p = p->link;
 	} while (p != L->head);
-	printf("%s->", p->data); // ¸¶Áö¸· ³ëµå Ãâ·Â
+	printf("%s->", p->data);
 }
 
 void insert_first(CListType* L, element data)
@@ -34,11 +34,11 @@ void insert_first(CListType* L, element data)
 		node->link = L->head;
 	}
 	else {
-		node->link = L->head->link;	// (1)
-		L->head->link = node;		// (2)
+		node->link = L->head->link;
+		L->head->link = node;
 	}
 }
-// ¿øÇü ¿¬°á ¸®½ºÆ® Å×½ºÆ® ÇÁ·Î±×·¥
+
 int main(void)
 {
 	CListType list = { NULL };
@@ -49,7 +49,7 @@ int main(void)
 
 	ListNode* p = list.head;
 	for (int i = 0; i< 10; i++) {
-		printf("ÇöÀç Â÷·Ê=%s \n", p->data);
+		printf("í˜„ìž¬ ì°¨ë¡€=%s \n", p->data);
 		p = p->link;
 	}
 	return 0;
