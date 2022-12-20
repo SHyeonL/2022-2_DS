@@ -6,50 +6,50 @@
 #define MAX_QUEUE_SIZE 10
 
 typedef int element;
-typedef struct { // Å¥ Å¸ÀÔ
+typedef struct { // Å¥ Å¸ï¿½ï¿½
 	element  queue[MAX_QUEUE_SIZE];
 	int  front, rear;
 } QueueType;
 
-// ¿À·ù ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 void error(char *message)
 {
 	fprintf(stderr, "%s\n", message);
 	exit(1);
 }
 
-// °ø¹é »óÅÂ °ËÃâ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 void queue_init(QueueType *q)
 {
 	q->front = q->rear = 0;
 }
 
-// °ø¹é »óÅÂ °ËÃâ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 int is_empty(QueueType *q)
 {
 	return (q->front == q->rear);
 }
 
-// Æ÷È­ »óÅÂ °ËÃâ ÇÔ¼ö
+// ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 int is_full(QueueType *q)
 {
 	return ((q->rear + 1) % MAX_QUEUE_SIZE == q->front);
 }
 
-// »ðÀÔ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 void enqueue(QueueType *q, element item)
 {
 	if (is_full(q))
-		error("Å¥°¡ Æ÷È­»óÅÂÀÔ´Ï´Ù");
+		error("Å¥ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½");
 	q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
 	q->queue[q->rear] = item;
 }
 
-// »èÁ¦ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 element dequeue(QueueType *q)
 {
 	if (is_empty(q))
-		error("Å¥°¡ °ø¹é»óÅÂÀÔ´Ï´Ù");
+		error("Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½");
 	q->front = (q->front + 1) % MAX_QUEUE_SIZE;
 	return q->queue[q->front];
 }
@@ -57,12 +57,12 @@ element dequeue(QueueType *q)
 
 #define MAX_VERTICES 50
 typedef struct GraphType {
-	int n;	// Á¤Á¡ÀÇ °³¼ö
+	int n;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	int adj_mat[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 int visited[MAX_VERTICES];
 
-// ±×·¡ÇÁ ÃÊ±âÈ­ 
+// ï¿½×·ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ 
 void graph_init(GraphType* g)
 {
 	int r, c;
@@ -71,20 +71,20 @@ void graph_init(GraphType* g)
 		for (c = 0; c<MAX_VERTICES; c++)
 			g->adj_mat[r][c] = 0;
 }
-// Á¤Á¡ »ðÀÔ ¿¬»ê
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void insert_vertex(GraphType* g, int v)
 {
 	if (((g->n) + 1) > MAX_VERTICES) {
-		fprintf(stderr, "±×·¡ÇÁ: Á¤Á¡ÀÇ °³¼ö ÃÊ°ú");
+		fprintf(stderr, "ï¿½×·ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½");
 		return;
 	}
 	g->n++;
 }
-// °£¼± »ðÀÔ ¿¬»ê
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void insert_edge(GraphType* g, int start, int end)
 {
 	if (start >= g->n || end >= g->n) {
-		fprintf(stderr, "±×·¡ÇÁ: Á¤Á¡ ¹øÈ£ ¿À·ù");
+		fprintf(stderr, "ï¿½×·ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½");
 		return;
 	}
 	g->adj_mat[start][end] = 1;
@@ -95,17 +95,17 @@ void bfs_mat(GraphType* g, int v)
 	int w;
 	QueueType q;
 
-	queue_init(&q);     // Å¥ ÃÊ±âÈ­ 
-	visited[v] = TRUE;          // Á¤Á¡ v ¹æ¹® Ç¥½Ã 
-	printf("%d  ¹æ¹® -> ", v);
-	enqueue(&q, v);			// ½ÃÀÛ Á¤Á¡À» Å¥¿¡ ÀúÀå 
+	queue_init(&q);     // Å¥ ï¿½Ê±ï¿½È­ 
+	visited[v] = TRUE;          // ï¿½ï¿½ï¿½ï¿½ v ï¿½æ¹® Ç¥ï¿½ï¿½ 
+	printf("%d  ï¿½æ¹® -> ", v);
+	enqueue(&q, v);			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	while (!is_empty(&q)) {
-		v = dequeue(&q);		// Å¥¿¡ Á¤Á¡ ÃßÃâ 
-		for (w = 0; w<g->n; w++)	// ÀÎÁ¢ Á¤Á¡ Å½»ö 
+		v = dequeue(&q);		// Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+		for (w = 0; w<g->n; w++)	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ 
 			if (g->adj_mat[v][w] && !visited[w]) {
-				visited[w] = TRUE;    // ¹æ¹® Ç¥½Ã
-				printf("%d ¹æ¹® -> ", w);
-				enqueue(&q, w); 	// ¹æ¹®ÇÑ Á¤Á¡À» Å¥¿¡ ÀúÀå
+				visited[w] = TRUE;    // ï¿½æ¹® Ç¥ï¿½ï¿½
+				printf("%d ï¿½æ¹® -> ", w);
+				enqueue(&q, w); 	// ï¿½æ¹®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
 	}
 }
@@ -124,7 +124,7 @@ int main(void)
 	insert_edge(g, 4, 5);
 	insert_edge(g, 1, 5);
 
-	printf("³Êºñ ¿ì¼± Å½»ö\n");
+	printf("ï¿½Êºï¿½ ï¿½ì¼± Å½ï¿½ï¿½\n");
 	bfs_mat(g, 0);
 	printf("\n");
 	free(g);
